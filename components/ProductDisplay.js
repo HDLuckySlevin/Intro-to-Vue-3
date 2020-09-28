@@ -1,4 +1,10 @@
 app.component('product-display', {
+    props: {
+        premium: {
+            type: Boolean,
+            required: true
+        }
+    },
     template:
     /*html*/
         `<div class="product-display">
@@ -8,7 +14,11 @@ app.component('product-display', {
         </div>
         <div class="product-info">
           <h1>{{ title }}</h1>
-  
+          
+          <product-details :details="details"></product-details>
+          
+          <p>Shipping: {{ shipping }}</p>
+          
           <p v-if="inStock">In Stock</p>
           <p v-else>Out of Stock</p>
   
@@ -60,6 +70,9 @@ app.component('product-display', {
         inStock() {
             //Fehler im original-Code
             return this.variants[this.selectedVariant].quantity;
+        },
+        shipping() {
+            return this.premium ? "Free" : 2.99;
         }
     }
 });
