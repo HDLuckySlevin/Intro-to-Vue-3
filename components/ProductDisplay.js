@@ -5,7 +5,7 @@ app.component('product-display', {
       required: true
     }
   },
-  template: 
+  template:
   /*html*/
   `<div class="product-display">
     <div class="product-container">
@@ -41,6 +41,7 @@ app.component('product-display', {
 
       </div>
     </div>
+    <review-form></review-form>
   </div>`,
   data() {
     return {
