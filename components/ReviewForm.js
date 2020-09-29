@@ -11,13 +11,22 @@ app.component('review-form', {
 
     <label for="rating">Rating:</label>
     <!-- modifier Typecasts the value as a numer -->
-    <select id="rating" v-model="rating.number">
+    <select id="rating" v-model.number="rating">
       <option>5</option>
       <option>4</option>
       <option>3</option>
       <option>2</option>
       <option>1</option>
     </select>
+    
+    
+    <label for="recommend">Would you recommend this product?</label>
+    <select id="recommend" v-model="recommend">
+      <option>Yes</option>
+      <option>No</option>
+    </select>
+    <!-- solution -->   
+    
 
     <input class="button" type="submit" value="Submit">
   </form>`,
@@ -27,21 +36,27 @@ app.component('review-form', {
             //als 2 way binding
             name: '',
             review: '',
-            rating: 0
+            rating: null,
+            recommend: ''
         };
     },
-    method: {
+    methods: {
         onSubmit() {
+            if (this.name === '' || this.review === '' || this.rating === null || this.recommend === '') {
+                alert('Reviw is incomplete. Please fill out every field!');
+                return;
+            }
             let productReview = {
                 name: this.name,
                 review: this.review,
-                rating: this.rating
+                rating: this.rating,
+                recommend: this.recommend
             };
             this.$emit('review-submitted', productReview);
-
-            this.name = "";
-            this.review = "";
+            this.name = '';
+            this.review = '';
             this.rating = null;
+            this.recommend = '';
         }
     }
 });
